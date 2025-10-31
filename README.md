@@ -90,33 +90,61 @@ VI. GỢI Ý CÔNG CỤ
 ## Các thành phần chính liên quan chữ ký
 
 -Catalog (Root): Là đối tượng gốc của tài liệu PDF. Trỏ đến cấu trúc trang (/Pages) và biểu mẫu (/AcroForm).
+
 -Pages Tree:
+
 Quản lý toàn bộ danh sách các trang trong tài liệu. Mỗi trang là một Page object.
+
 -Page Object
+
 Đại diện cho từng trang (có nội dung, annotation, form fields).
+
 -Resources
+
 Tài nguyên đồ họa/text dùng trong trang (font, image, XObject…).
+
 -Content Streams
+
 Dòng lệnh vẽ nội dung hiển thị (text, hình ảnh). Không chứa chữ ký.
+
 -XObject
+
 Đối tượng mở rộng (ảnh, form con). Không trực tiếp chứa chữ ký, nhưng có thể được tham chiếu trong trang ký.
+
 -AcroForm
+
 Biểu mẫu PDF chứa danh sách các field (bao gồm field chữ ký). Đây là nơi quản lý các Signature field.
+
 -Signature Field (Widget)
+
 Trường hiển thị vùng chữ ký trong PDF. Thường có /T (tên field), /FT /Sig, /V trỏ đến dictionary chữ ký.
+
 -Signature Dictionary (/Sig)
+
 Thực thể chính chứa dữ liệu chữ ký số. Bao gồm:
+
 • /Filter và /SubFilter: định nghĩa chuẩn chữ ký (như adbe.pkcs7.detached hoặc ETSI.CAdES.detached).
+
 • /Contents: chứa nội dung chữ ký (chuỗi PKCS#7, dạng hex).
+
 • /ByteRange: vùng byte được ký (tránh vòng lặp).
+
 • /M: thời gian ký.
+
 -/ByteRange
+
 Mảng 4 giá trị xác định phạm vi byte của file được ký (phần /Contents bị bỏ qua khi tạo hash).
+
 -/Contents
+
 Dữ liệu chữ ký thật, thường là cấu trúc PKCS#7/CMS.
+
 -Incremental Updates
+
 Mỗi lần ký hoặc chỉnh sửa, PDF không ghi đè mà thêm phần mới vào cuối file (append-only). Nhờ vậy, ta có thể có nhiều chữ ký trong một file PDF.
+
 -DSS (Document Security Store) (PAdES)
+
 Lưu thông tin hỗ trợ xác thực lâu dài: chứng chỉ, OCSP, CRL, timestamp. Giúp đảm bảo chữ ký còn hợp lệ dù CA gốc hết hạn.
 
 ## Liệt kê & vai trò object refs quan trọng
@@ -160,5 +188,7 @@ DSS chỉ có trong PDF chuẩn PAdES (Long-Term Validation).
 
 <img width="449" height="500" alt="image" src="https://github.com/user-attachments/assets/e6b34799-0317-4400-9023-b0549faf3db2" />
 
+## Kết quả
+<img width="613" height="783" alt="image" src="https://github.com/user-attachments/assets/9d696e09-4959-4546-a4bc-3132a1a3c492" />
 
 
